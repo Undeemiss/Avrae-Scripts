@@ -1,0 +1,6 @@
+!snippet -invest <drac2>
+a = argparse(&ARGS&).last('invest')
+arg = a if a != 'True' else get('defaultInvest')
+dc = combat().get_combatant(arg).spellbook.dc
+</drac2>
+-dc {{dc}} magical
