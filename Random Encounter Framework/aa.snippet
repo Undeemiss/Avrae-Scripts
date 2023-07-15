@@ -1,0 +1,10 @@
+!snippet aa multiline <drac2>
+# Test Data
+encounter = [('imp', '1'), ('bandit', '1d4')]
+
+# Put together a multiline chain of '!i madd' commands
+madd_string = ''
+for creature_name, count in encounter:
+    madd_string += f'!i madd {creature_name} -n {count}\n'
+</drac2>
+{{madd_string}}
