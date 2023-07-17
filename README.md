@@ -6,3 +6,5 @@ As a strong believer in open-source methodology, I have opted to open-source all
 ### Workshop Links
 * [Enhanced Durations](https://avrae.io/dashboard/workshop/64ac91d147088352635c1359)
 * [Investment of the Chain Master](https://avrae.io/dashboard/workshop/64a8d2af010227089331df81)
+
+Note that the content in the above links may be out-of-date relative to this repo, as I prefer to push my changes to GitHub more often than I update the workshop links.
