@@ -27,7 +27,7 @@ def pluralize_encounter(rolled_encounter: RolledEncounter = []) -> str:
         if i < len(rolled_encounter) - 2:
             pluralized_string += ', '
         elif i == len(rolled_encounter) - 2:
-            pluralized_string += ' and '
+            pluralized_string += ', and '
     return pluralized_string
 
 
