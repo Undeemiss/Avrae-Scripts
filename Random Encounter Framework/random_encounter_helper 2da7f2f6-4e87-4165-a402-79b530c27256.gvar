@@ -35,5 +35,5 @@ def pluralize_encounter(rolled_encounter: RolledEncounter = []) -> str:
 def generate_madd_string(rolled_encounter: RolledEncounter = []) -> str:
     madd_string = ''
     for creature_name, count in rolled_encounter:
-        madd_string += f'!i madd {creature_name} -n {str(count)}\n'
+        madd_string += f'!i madd "{creature_name}" -n {str(count)}\n'
     return madd_string
