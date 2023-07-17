@@ -1,14 +1,14 @@
-!alias aa <drac2>
+!alias aa embed <drac2>
     using(
         random_encounter_helper="2da7f2f6-4e87-4165-a402-79b530c27256"
     )
 
     # Test Data
-    encounter = [('imp', '1'), ('bandit', '1d4')]
+    encounter = [('imp', '1'), ('bandit', '1d4'), ('pixie', '1')]
 
     rolled_encounter = random_encounter_helper.roll_encounter(encounter)
-    madd_string = random_encounter_helper.generate_madd_string(rolled_encounter)
 
-    title = 'Test Title'
-    desc = '!multiline\n' + madd_string
-</drac2>embed -title '{{title}}'
+    enemy_list = random_encounter_helper.pluralize_encounter(rolled_encounter)
+    cmd = '!multiline\n' + random_encounter_helper.generate_madd_string(rolled_encounter)
+</drac2>
+-title '{{name}} searches for an encounter!' -f 'Enemies Found|{{enemy_list}}' -f 'Command|```{{cmd}}```'

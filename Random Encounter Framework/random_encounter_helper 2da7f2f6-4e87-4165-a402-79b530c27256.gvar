@@ -15,6 +15,22 @@ def roll_encounter(encounter: Encounter = []) -> RolledEncounter:
     return [(creature_name, roll(count_dice)) for (creature_name, count_dice) in encounter]
 
 
+# Attempt to create a correctly pluralized human-readable list of the enemies in a RolledEncounter
+def pluralize_encounter(rolled_encounter: RolledEncounter = []) -> str:
+    pluralized_string = ''
+    for i in range(len(rolled_encounter)):
+        # Create an entry for this creature
+        creature_name, count = rolled_encounter[i]
+        pluralized_string += f'{count} {creature_name}{"s"[:count^1]}'
+
+        # Determine what delimiter to add, if any
+        if i < len(rolled_encounter) - 2:
+            pluralized_string += ', '
+        elif i == len(rolled_encounter) - 2:
+            pluralized_string += ' and '
+    return pluralized_string
+
+
 # Put together a multiline chain of '!i madd' commands for the given RolledEncounter
 def generate_madd_string(rolled_encounter: RolledEncounter = []) -> str:
     madd_string = ''
