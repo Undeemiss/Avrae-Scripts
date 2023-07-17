@@ -1,4 +1,4 @@
-# random_encounter_helper <drac2>
+# random_encounter_helper
 # 
 # Takes a list of creature names and counts,
 # and produces a string of !i madd commands
