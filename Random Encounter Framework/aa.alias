@@ -1,10 +1,14 @@
-!alias aa multiline <drac2>
-# Test Data
-encounter = [('imp', '1'), ('bandit', '1d4')]
+!alias aa <drac2>
+    using(
+        random_encounter_helper="2da7f2f6-4e87-4165-a402-79b530c27256"
+    )
 
-# Put together a multiline chain of '!i madd' commands
-madd_string = ''
-for creature_name, count in encounter:
-    madd_string += f'!i madd {creature_name} -n {count}\n'
-</drac2>
-{{madd_string}}
+    # Test Data
+    encounter = [('imp', '1'), ('bandit', '1d4')]
+
+    rolled_encounter = random_encounter_helper.roll_encounter(encounter)
+    madd_string = random_encounter_helper.generate_madd_string(rolled_encounter)
+
+    title = 'Test Title'
+    desc = '!multiline\n' + madd_string
+</drac2>embed -title '{{title}}'

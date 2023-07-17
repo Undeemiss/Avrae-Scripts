@@ -1,0 +1,23 @@
+# random_encounter_helper <drac2>
+# 
+# Takes a list of creature names and counts,
+# and produces a string of !i madd commands
+# to add the given enemies to combat.
+
+CreatureName = str
+CountDice = str
+Count = int
+Encounter = list[CreatureName, CountDice]
+RolledEncounter = list[CreatureName, Count]
+
+# Returns a RolledEncounter generated from the given Encounter
+def roll_encounter(encounter: Encounter = []) -> RolledEncounter:
+    return [(creature_name, roll(count_dice)) for (creature_name, count_dice) in encounter]
+
+
+# Put together a multiline chain of '!i madd' commands for the given RolledEncounter
+def generate_madd_string(rolled_encounter: RolledEncounter = []) -> str:
+    madd_string = ''
+    for creature_name, count in rolled_encounter:
+        madd_string += f'!i madd {creature_name} -n {str(count)}\n'
+    return madd_string
