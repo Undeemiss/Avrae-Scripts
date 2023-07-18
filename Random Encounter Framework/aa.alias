@@ -1,4 +1,4 @@
-!alias aa embed <drac2>
+embed <drac2>
     using(
         random_encounter_helper="2da7f2f6-4e87-4165-a402-79b530c27256"
     )

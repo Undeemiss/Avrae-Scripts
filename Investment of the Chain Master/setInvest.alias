@@ -1,4 +1,4 @@
-!alias setInvest embed <drac2>
+embed <drac2>
 set_uvar('defaultInvest', '&1&' if '&1&' != '&' + '1' + '&' else character().name)
 </drac2>
 -title '{{'Default target for -invest snippet set to "' + str(get_uvar('defaultInvest')) + '"'}}'
