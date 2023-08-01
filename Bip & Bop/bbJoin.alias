@@ -28,7 +28,8 @@ except ValueError:
 
 # Set bop_opts
 bop_name = ch.get_cvar('bop_id')
-bop_opts = f'-name "Bop{f" ({bop_name})" if bop_name else ""}" -group {GROUP_NAME}'
+bop_name_string = f'"Bop{f" ({bop_name})" if bop_name else ""}"'
+bop_opts = f'-group {GROUP_NAME}'
 try:
     identity = identities[bop_name]
     for key in identity:
@@ -40,5 +41,5 @@ except ValueError:
 
 !i join
 !i opt "Bip & Bop" {{bip_opts}}
-!i add 0 "Bop" {{BOP_STATS}} {{bop_opts}}
-!i hp "Bop" set {{ch.get_cc("Twin HP")}}
+!i add 0 {{bop_name_string}} {{BOP_STATS}} {{bop_opts}}
+!i hp {{bop_name_string}} set {{ch.get_cc("Twin HP")}}
