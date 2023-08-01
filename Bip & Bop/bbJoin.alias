@@ -1,0 +1,44 @@
+multiline <drac2>
+
+# Get character() and set constants
+ch = character()
+GROUP_NAME = '"Bip & Bop (BB)"'
+BOP_STATS = f'-hp {ch.max_hp} -ac {armor} -pb {proficiencyBonus} ' + \
+            f'-strength {strength} -dexterity {dexterity} -constitution {constitution} ' + \
+            f'-intelligence {intelligence} -wisdom {wisdom} -charisma {charisma} ' + \
+            '-save dexterity -save intelligence -prof arcana -prof deception ' + \
+            '-prof history -prof insight -prof investigation -prof performance ' + \
+            '-exp arcana -exp survival -type fey'
+
+# Test Code
+identities = {
+    'Edward': {'ac': str(armor + 1)},
+    'Vinn': {'ac': str(armor)},
+}
+
+# Set bip_opts
+bip_name = ch.get_cvar('bip_id')
+bip_opts = f'-name "Bip{f" ({bip_name})" if bip_name else ""}" -group {GROUP_NAME}'
+try:
+    identity = identities[bip_name]
+    for key in identity:
+        bip_opts += f' -{key} {identity[key]}'
+except ValueError:
+    pass
+
+# Set bop_opts
+bop_name = ch.get_cvar('bop_id')
+bop_opts = f'-name "Bop{f" ({bop_name})" if bop_name else ""}" -group {GROUP_NAME}'
+try:
+    identity = identities[bop_name]
+    for key in identity:
+        bop_opts += f' -{key} {identity[key]}'
+except ValueError:
+    pass
+
+</drac2>
+
+!i join
+!i opt "Bip & Bop" {{bip_opts}}
+!i add 0 "Bop" {{BOP_STATS}} {{bop_opts}}
+!i hp "Bop" set {{ch.get_cc("Twin HP")}}
