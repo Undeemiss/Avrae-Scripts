@@ -14,6 +14,6 @@ for i in spells:
     out = f'''cast "{spellToCast}" {args.remove(args[0])} i'''
     break
 if not out:
-  out = f'''embed -title "{name} fails to cast {spellToCast}..." -desc "{name} does not have that spell prepared and cannot ritual cast it!" -color <color> -thumb <image>'''
+  out = f'''embed -title "{name} fails to cast {spellToCast}..." -desc "{name} does not have that spell prepared and cannot ritual cast it!" -color {color} -thumb {image}'''
 return out
 </drac2>
