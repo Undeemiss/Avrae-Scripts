@@ -8,3 +8,8 @@ As a strong believer in open-source methodology, I have opted to open-source all
 * [Investment of the Chain Master](https://avrae.io/dashboard/workshop/64a8d2af010227089331df81)
 
 Note that the content in the above links may be out-of-date relative to this repo, as I prefer to push my changes to GitHub more often than I update the workshop links.
+
+### Special Thanks
+A big thank you goes out to the following people who donated code to this repository through [the official Avrae Discord server](https://discord.gg/avrae-development-269275778867396608) rather than GitHub.
+* TheReverendB - [GitHub](https://github.com/TheReverendB)
+* KedarOthort - [GitHub](https://github.com/KedarOthort)
