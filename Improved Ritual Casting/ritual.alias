@@ -1,9 +1,8 @@
 <drac2>
 # This alias kindly donated by @kedarothort on the Avrae Support Discord server.
 
-spellToCast = "&1&"
 args = &ARGS&
-prepped = False
+spellToCast = args[0]
 out = ''
 spellbook = character().spellbook
 spells = spellbook.spells
@@ -11,7 +10,7 @@ for i in spells:
   correctSpell = spellToCast.lower() in i.name.lower()
   spellToCast = i.name if correctSpell else spellToCast
   if correctSpell and i.prepared:
-    out = f'''cast "{spellToCast}" {args.remove(args[0])} i'''
+    out = f'''cast "{spellToCast}" {' '.join(args).replace(spellToCast,'')} i'''
     break
 if not out:
   out = f'''embed -title "{name} fails to cast {spellToCast}..." -desc "{name} does not have that spell prepared and cannot ritual cast it!" -color {color} -thumb {image}'''
