@@ -1,0 +1,26 @@
+multiline <drac2>
+args = &ARGS&
+spellToCast = args[0]
+args.remove(args[0])
+
+spellLevel = int(argparse(args).last('l'))
+
+out = ''
+spellbook = character().spellbook.spells
+for spell in spellbook:
+  correctSpell = spellToCast.lower() in spell.name.lower()
+  spellToCast = spell.name if correctSpell else spellToCast
+  if correctSpell and spell.prepared:
+    out = f'''cast "{spellToCast}" «{'» «'.join(args)}»'''
+    break
+if not out:
+  out = f'''embed -title "{name} fails to cast {spellToCast}..." -desc "{name} does not have that spell prepared and cannot ritual cast it!" -color {color} -thumb {image}'''
+
+# Apply bonuses to the spell based on Life Cleric Level
+if ClericLevel >= 2:
+  out += f' -d {-(spellLevel + 2)}'
+if ClericLevel >= 17:
+  out += ' max'
+
+return out
+</drac2>
