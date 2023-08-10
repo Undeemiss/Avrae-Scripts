@@ -13,7 +13,7 @@ BOP_STATS = f'-hp {ch.max_hp} -ac {armor} -pb {proficiencyBonus} ' + \
 # Test Code
 identities = {
     'Edward': {'ac': str(armor + 2)},
-    'Vinn': {'ac': str(armor + 1)},
+    'Vinn': {'ac': str(armor + 2)},
 }
 
 # Set bip_opts
