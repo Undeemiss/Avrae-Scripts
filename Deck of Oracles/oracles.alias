@@ -1,0 +1,62 @@
+<drac2>
+REROLL_CC = "Deck of Oracles: Reroll"
+DIVINATION_CC = "Deck of Oracles: Divination"
+
+ch = character()
+mode = "&1&"[0].lower()
+
+if mode != "a" and not (ch.cc_exists(REROLL_CC) and ch.cc_exists(DIVINATION_CC)):
+    return f"embed -title '{name} does not have the CCs to use a Deck of Oracles. They can be initialized with !oracles init'"
+
+match mode:
+    case "r": # Roll
+        if ch.get_cc(REROLL_CC) == 0:
+            rolled = ch.set_cc(REROLL_CC, roll("1d20"))
+            return f"embed -title '{name} consults their Deck of Oracles!' -desc 'The cards bear witness to a **{rolled}** in your future.'"
+        if ch.get_cc(REROLL_CC) > 0:
+            return f"embed -title '{name} consults their Deck of Oracles!' -desc 'The cards bore witness to a **{ch.get_cc(REROLL_CC)}** in your future.'"
+        if ch.get_cc(REROLL_CC) < 0:
+            return f"embed -title '{name} consults their Deck of Oracles!' -desc 'The prophesied event has already come to pass.'"
+
+    case "u": # Use
+        if ch.get_cc(REROLL_CC) > 0:
+            return f"embed -title '{name} foresaw this moment within their Deck of Oracles!' -desc 'The cards bore witness to a **{ch.get_cc(REROLL_CC)}** in your future.'"
+        if ch.get_cc(REROLL_CC) == 0:
+            rolled = ch.set_cc(REROLL_CC, roll("1d20"))
+            return f"embed -title '{name} has not yet consulted their Deck of Oracles!' -desc 'Use !oracles roll to learn your future.'"
+        if ch.get_cc(REROLL_CC) < 0:
+            return f"embed -title '{name} has no further insight from their Deck of Oracles!' -desc 'The prophesied event has already come to pass.'"
+
+    case "d": # Divination
+        if ch.get_cc(DIVINATION_CC) > 0:
+            ch.mod_cc(DIVINATION_CC, -1)
+            return f"cast divination -i -f '{DIVINATION_CC}|〇 (-1)'"
+        else:
+            return f"embed -title '{name} has already cast Divination using their Deck of Oracles!' -desc 'You have already cast Divination with your Deck of Oracles.'"
+        return f"multiline\n!cc '{DIVINATION_CC}' -1\n!cast divination -i"
+    
+    case "a": # Attune
+        ch.create_cc(REROLL_CC, -1, 20, 'long', 'none', 0, initial_value=0)
+        ch.create_cc(DIVINATION_CC, 0, 1, 'long', 'bubble')
+        return f"embed -title '{name} attunes to a Deck of Oracles!' -desc 'Inizialized CCs for {name} to use a Deck of Oracles.'"
+
+    case "u": # Unattune
+        ch.delete_cc(REROLL_CC)
+        ch.delete_cc(DIVINATION_CC)
+        return f"embed -title '{name} unattunes from a Deck of Oracles!' -desc 'Deleted CCs for {name} to use a Deck of Oracles.'"
+
+    case _: # Help
+        help_str = '''These commands can be abbreviated (`!oracles r` does the same thing as `!oracles roll`, etc.)
+        
+        !oracles roll: Roll the d20 for a Deck of Oracles. Won't overwrite existing values. If you need to reset it without resting for whatever reason, you can set the CC to 0.
+        !oracles use: Use your reaction to replace a d20 using a Deck of Oracles.
+        !oracles divination: Cast Divination via a Deck of Oracles.
+        !oracles attune: Add CCs to your character to use a Deck of Oracles. These are not added automatically so that it won't add unwanted CCs if you use the wrong character by accident.
+        !oracles unattune: Delete the CCs used by this alias.
+        !oracles help: See this message. Anything that starts with !oracles that doesn't trigger one of the above options should bring this up, technically.
+        '''
+        return f"embed -title '!oracles help' -desc \"{help_str}\""
+        pass
+
+raise Exception("Error: No return value (This is a bug in the !oracles alias)")
+</drac2> -footer "!oracles help for how to use" -color <color> -thumb <image>
